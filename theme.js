@@ -24,27 +24,43 @@ export const theme = extendTheme({
     Button: {
       baseStyle: (props) => {
         return {
-          _light: { color: "primary.900" },
-          _dark: { color: "primary.600" },
+          _light: { backgroundColor: "primary.100" },
+          _dark: { backgroundColor: "primary.900" },
           fontWeight: "normal",
         };
       },
       defaultProps: {
         fontSize: 24,
         fontWeight: 600,
-      }
+      },
     },
     Heading: {
       baseStyle: (props) => {
         return {
-          _light: { backgroundColor: "red.300" },
-          _dark: { backgroundColor: "blue.300" },
+          _light: { color: "#0B0D14" },
+          _dark: { color: "#fff" },
         };
       },
       defaultProps: {
         fontSize: 26,
       },
     },
+    View: {
+      baseStyle: (props) => {
+        return {
+          _light: { backgroundColor: "blue.50" },
+          _dark: { backgroundColor: "#222222" },
+        };
+      },
+    },
+    Input: {
+      baseStyle: (props) => {
+        return {
+          _light: { color: "#000", placeholderTextColor: "gray.500" },
+          _dark: { color: "#fff", placeholderTextColor: "gray.50" },
+        };
+      },
+    }
   },
   config: {
     // Changing initialColorMode to 'dark'

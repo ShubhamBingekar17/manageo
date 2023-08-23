@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "manageo",
-    "slug": "manageo",
+    "name": "AwesomeProject",
+    "slug": "AwesomeProject",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -32,8 +32,7 @@
     },
     "plugins": [
       "@react-native-firebase/app",
-      "@react-native-firebase/perf",
-      "@react-native-firebase/crashlytics",
+      "@react-native-firebase/auth",
       [
         "expo-build-properties",
         {
