@@ -41,7 +41,6 @@ const Home = () => {
 
   const getAllTasksData = () => {
     const data =store.getState().task;
-    console.log(data, "task data");
     setTaskData(data);
     setFilteredData(data);
   };
@@ -71,8 +70,9 @@ const Home = () => {
   }, [filterCompleted, filterPending]);
   
   useEffect(() => {
+    if(taskData.length != store.getState().task)
     getAllTasksData();
-  }, [store.getState().task, changes]);
+  }, [store.getState().task]);
   
   useEffect(() => {
     getAllTasks();

@@ -5,6 +5,8 @@ const initialState = {
 const storeReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_ALL_TASK":
+      console.log("action.data ",action.data)
+      if(initialState.task.length == 0)
       return {
         task: action.data,
       };
@@ -16,11 +18,11 @@ const storeReducer = (state = initialState, action) => {
 
     case "UPDATE_TASK":
       return {
-        task: initialState.task[action.data.index] = action.data.value,
+        task: action.data.payload[action.data.index] = action.data.value,
       };
     case "DELETE_TASK": 
       return {
-        task: initialState.task.splice(action.data , 1),
+        task: action.data.payload.splice(action.data.index , 1),
       }
     default:
       return state;
