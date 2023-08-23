@@ -39,3 +39,9 @@ Dark & Light
 ## UI Library Used ##
 
 Native Base
+
+## API config ##
+
+add you api url in api.js file
+
+<!-- currently used local terminal for dev purpose -->
