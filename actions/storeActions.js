@@ -1,12 +1,12 @@
 import axios from "axios";
-import { api } from "../api/api";
+import { APIURL } from "../api/api";
 import store from "../store/configStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const createUser = async (data , navigation) => {
   axios({
     method: "post",
-    url: `https://nice-months-throw.loca.lt/firebaseFirestore/addUser`,
+    url: `${APIURL}/firebaseFirestore/addUser`,
     data: data,
   })
     .then((res) => {
@@ -22,11 +22,10 @@ const createUser = async (data , navigation) => {
 const loginUser = async (data) => {
   axios({
     method: "post",
-    url: `https://nice-months-throw.loca.lt/firebaseFirestore/getUserById`,
+    url: `${APIURL}/firebaseFirestore/getUserById`,
     data,
   })
     .then((res) => {
-      //
       return true;
     })
     .catch((error) => {
@@ -41,7 +40,7 @@ const addNewTask = (data) => {
   });
   axios({
     method: "post",
-    url: `https://nice-months-throw.loca.lt/firebaseFirestore/addTask`,
+    url: `${APIURL}/firebaseFirestore/addTask`,
     data: data,
   })
     .then((res) => {
@@ -63,7 +62,7 @@ const updateTask = (data) => {
 const getAllTasks = async (data) => {
   axios({
     method: "get",
-    url: `https://nice-months-throw.loca.lt/firebaseFirestore/getAllTask`,
+    url: `${APIURL}/firebaseFirestore/getAllTask`,
   })
     .then((res) => {
       console.log("response ", res.data);
