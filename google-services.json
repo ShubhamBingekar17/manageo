@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "363820827913",
+    "firebase_url": "https://manegeo-b4370-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "manegeo-b4370",
+    "storage_bucket": "manegeo-b4370.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363820827913:android:4c9e1fd686d3c545027fd8",
+        "android_client_info": {
+          "package_name": "com.example.manageo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363820827913-q7v3j8t53g7uhk0hf17gsj3gbt0unhqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk7h7rzUW_yVwUzakf446bhEuLXo11h4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363820827913-q7v3j8t53g7uhk0hf17gsj3gbt0unhqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
