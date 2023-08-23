@@ -17,7 +17,6 @@ import BinIcon from "../assets/BinIcon";
 import store from "../store/configStore";
 import { removeTask } from "../actions/storeActions";
 
-
 const TaskCard = ({
   taskName,
   taskDate,
@@ -26,10 +25,9 @@ const TaskCard = ({
   handleEditTask,
   index,
 }) => {
-
   const handleDeleteTask = (index) => {
-    store.dispatch(removeTask(index))
-  }
+    store.dispatch(removeTask(index));
+  };
 
   return (
     <Box alignItems="center">
@@ -53,7 +51,7 @@ const TaskCard = ({
         }}
       >
         <Stack p="4" space={3}>
-          <HStack justifyContent={'space-between'}>
+          <HStack justifyContent={"space-between"}>
             <Stack space={2}>
               <Heading size="md" ml="-1">
                 {taskName}
@@ -74,32 +72,31 @@ const TaskCard = ({
               </Text>
             </Stack>
             <HStack space={2}>
-
-            <Pressable
-              onPress={() =>
-                handleEditTask({
+              <Pressable
+                onPress={() =>
+                  handleEditTask({
                     taskTitle: taskName,
                     taskDiscription,
                     createdAt: taskDate,
                     status: taskStatus,
                     index: index,
-                })
-            }
-            >
-              <EditIcon />
-            </Pressable>
-            <Pressable
-              onPress={() =>
-                handleDeleteTask(index)
-            }
-            >
-              <BinIcon />
-            </Pressable>
-                </HStack>
+                  })
+                }
+              >
+                <EditIcon />
+              </Pressable>
+              <Pressable onPress={() => handleDeleteTask(index)}>
+                <BinIcon />
+              </Pressable>
+            </HStack>
           </HStack>
           <Text fontWeight="400">{taskDiscription}</Text>
           <HStack alignItems="center" space={4} justifyContent="space-between">
-            <HStack alignItems="center" width={'100%'} justifyContent={'space-between'}>
+            <HStack
+              alignItems="center"
+              width={"100%"}
+              justifyContent={"space-between"}
+            >
               <Button variant={"ghost"}>Mark Completed</Button>
             </HStack>
           </HStack>

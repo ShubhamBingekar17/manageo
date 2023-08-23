@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const createUser = async (data , navigation) => {
   axios({
     method: "post",
-    url: `https://wet-feet-tickle.loca.lt/firebaseFirestore/addUser`,
+    url: `https://nice-months-throw.loca.lt/firebaseFirestore/addUser`,
     data: data,
   })
     .then((res) => {
@@ -22,7 +22,7 @@ const createUser = async (data , navigation) => {
 const loginUser = async (data) => {
   axios({
     method: "post",
-    url: `https://wet-feet-tickle.loca.lt/firebaseFirestore/getUserById`,
+    url: `https://nice-months-throw.loca.lt/firebaseFirestore/getUserById`,
     data,
   })
     .then((res) => {
@@ -41,7 +41,7 @@ const addNewTask = (data) => {
   });
   axios({
     method: "post",
-    url: `https://wet-feet-tickle.loca.lt/firebaseFirestore/addTask`,
+    url: `https://nice-months-throw.loca.lt/firebaseFirestore/addTask`,
     data: data,
   })
     .then((res) => {
@@ -63,7 +63,7 @@ const updateTask = (data) => {
 const getAllTasks = async (data) => {
   axios({
     method: "get",
-    url: `https://wet-feet-tickle.loca.lt/firebaseFirestore/getAllTask`,
+    url: `https://nice-months-throw.loca.lt/firebaseFirestore/getAllTask`,
   })
     .then((res) => {
       console.log("response ", res.data);

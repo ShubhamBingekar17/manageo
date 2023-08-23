@@ -15,6 +15,7 @@ import {
 } from "native-base";
 import AddTaskModal from "../layouts/AddTaskModal";
 import PlusIcon from "../assets/PlusIcon";
+import LogoutIcon from "../assets/LogoutIcon";
 import TaskCard from "../layouts/TaskCard";
 import store from "../store/configStore";
 import FilterIcon from "../assets/FilterIcon";
@@ -38,15 +39,14 @@ const Home = () => {
   const [logout , setLogout] = useState(false);
   const changes = useSelector((state) => state.task);
 
-  const getAllTasksData =async () => {
+  const getAllTasksData = () => {
     const data =store.getState().task;
-    console.log(store.getState().task, " data");
+    console.log(data, "task data");
     setTaskData(data);
     setFilteredData(data);
   };
 
   const handleEditTask = useCallback((taskData) => {
-    console.log(" ops ", taskData);
     setUpdateTaskData(taskData);
     setModalVisible(true);
   }, []);
@@ -72,7 +72,11 @@ const Home = () => {
   
   useEffect(() => {
     getAllTasksData();
-  }, [store.getState().task]);
+  }, [store.getState().task, changes]);
+  
+  useEffect(() => {
+    getAllTasks();
+  }, [])
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -141,7 +145,7 @@ const Home = () => {
         placement="bottom-right"
         colorScheme="blue"
         size="lg"
-        icon={<PlusIcon />}
+        icon={<LogoutIcon />}
       />
       <AddTaskModal
         modalVisible={modalVisible}

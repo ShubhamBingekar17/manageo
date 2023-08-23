@@ -6,7 +6,7 @@ const ToastMessage = ({ message, type }) => {
     <View
       bg={type == "error" ? "#B21E42" : "#1C6C40"}
       px="5"
-      py="10"
+      py="2"
       rounded="3xl"
       mb={5}
     >

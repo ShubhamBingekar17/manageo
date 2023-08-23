@@ -31,14 +31,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
 
   const toast = useToast();
 
   const getLoggedinUser = async () => {
     const data = await AsyncStorage.getItem("userId");
-    console.log("dataaaaa ", data);
     if (data) {
       getAllTasks();
       navigation.navigate("Home");
@@ -54,35 +52,15 @@ const Login = () => {
       loginUser({
         email,
         password,
-      })
-        .then((res) => {
-          console.log("here fi")
-          if (res) {
-            navigation.navigate("Home");
-            handleResetData();
-            toast.show({
-              avoidKeyboard: true,
-              render: () => (
-                <ToastMessage message={"Login Success"} type={"success"} />
-              ),
-            });
-          } else {
-            toast.show({
-              avoidKeyboard: true,
-              render: () => (
-                <ToastMessage message={"Failed to login"} type={"error"} />
-              ),
-            });
-          }
-        })
-        .catch((error) => {
-          toast.show({
-            avoidKeyboard: true,
-            render: () => (
-              <ToastMessage message={"Failed to login"} type={"error"} />
-            ),
-          });
-        });
+      });
+      navigation.navigate("Home");
+      handleResetData();
+      toast.show({
+        avoidKeyboard: true,
+        render: () => (
+          <ToastMessage message={"Login Success"} type={"success"} />
+        ),
+      });
     }
   };
 
@@ -141,10 +119,13 @@ const Login = () => {
 
     if (email && password && validateEmail(email)) {
       try {
-        createUser({
-          email,
-          password,
-        }, navigation)
+        createUser(
+          {
+            email,
+            password,
+          },
+          navigation
+        );
       } catch (e) {
         console.log("error: ", e);
         Alert.alert("Oops", "Please check your form and try again");
@@ -186,13 +167,6 @@ const Login = () => {
             placeholder="Confirm Password"
           />
         )}
-        {/* <Checkbox
-          onChange={() => setRememberMe((prev) => !prev)}
-          isChecked={rememberMe}
-          colorScheme="green"
-        >
-          Remeber Me
-        </Checkbox> */}
         <Button
           rounded={20}
           onPress={loginForm ? handleLogin : handleRegisterUser}
