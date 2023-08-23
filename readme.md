@@ -35,3 +35,7 @@ Android & IOS
 Dark & Light
 
 <!-- swicthing can be done in login page -->
+
+## UI Library Used ##
+
+Native Base
