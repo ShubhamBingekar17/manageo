@@ -1,2 +1,2 @@
 
-export const APIURL = "https://dark-weeks-stare.loca.lt"
+export const APIURL = "https://better-hornets-yell.loca.lt"

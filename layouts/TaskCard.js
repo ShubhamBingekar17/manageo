@@ -15,7 +15,7 @@ import React, { memo } from "react";
 import EditIcon from "../assets/EditIcon";
 import BinIcon from "../assets/BinIcon";
 import store from "../store/configStore";
-import { removeTask } from "../actions/storeActions";
+import { removeTask, updateTask } from "../actions/storeActions";
 
 const TaskCard = ({
   taskName,
@@ -23,11 +23,11 @@ const TaskCard = ({
   taskDiscription,
   taskStatus,
   handleEditTask,
+  handleCompleteTask,
+  handleDeleteTask,
   index,
 }) => {
-  const handleDeleteTask = (index) => {
-    store.dispatch(removeTask(index));
-  };
+
 
   return (
     <Box alignItems="center">
@@ -97,7 +97,19 @@ const TaskCard = ({
               width={"100%"}
               justifyContent={"space-between"}
             >
-              <Button variant={"ghost"}>Mark Completed</Button>
+              <Button
+                variant={"ghost"}
+                onPress={() =>
+                  handleCompleteTask(index, {
+                    taskTitle: taskName,
+                    taskDiscription: taskDiscription,
+                    createdAt: taskDate,
+                    status: "completed",
+                  })
+                }
+              >
+                Mark Completed
+              </Button>
             </HStack>
           </HStack>
         </Stack>

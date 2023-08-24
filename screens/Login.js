@@ -6,22 +6,18 @@ import {
   Text,
   Heading,
   View,
-  Checkbox,
   Pressable,
   useToast,
   useColorMode,
 } from "native-base";
-import { Alert, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import db from "@react-native-firebase/database";
 import { EyeIcon } from "../assets/EyeIcon";
 import { EyeCloseIcon } from "../assets/EyeCloseIcon";
-import ToastMessage from "../utils/ToastMessage";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { validateEmail } from "../utils/validations";
-import { createUser, getAllTasks, loginUser } from "../actions/storeActions";
+import { createUser, loginUser } from "../actions/storeActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ToastMessage from "../utils/ToastMessage";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -38,29 +34,34 @@ const Login = () => {
   const getLoggedinUser = async () => {
     const data = await AsyncStorage.getItem("userId");
     if (data) {
-      getAllTasks();
       navigation.navigate("Home");
     }
   };
 
   useEffect(() => {
-    getLoggedinUser();
+    getLoggedinUser(); //auto login
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (checkCredentials()) {
       loginUser({
         email,
         password,
-      });
-      navigation.navigate("Home");
-      handleResetData();
-      toast.show({
-        avoidKeyboard: true,
-        render: () => (
-          <ToastMessage message={"Login Success"} type={"success"} />
-        ),
-      });
+      })
+        .then((success) => {
+          if (success.userId) {
+            navigation.navigate("Home");
+            handleResetData();
+            AsyncStorage.setItem("userId", success.userId);
+            showToast({ message: "Login Success", type: "success" });
+          } else {
+            showToast({ message: "Login Failed", type: "error" });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          showToast({ message: "An error occurred", type: "error" });
+        });
     }
   };
 
@@ -76,12 +77,7 @@ const Login = () => {
         return true;
       }
     } else {
-      toast.show({
-        avoidKeyboard: true,
-        render: () => (
-          <ToastMessage message={"Enter a valid email"} type={"error"} />
-        ),
-      });
+      showToast({ message: "Enter a valid email", type: "error" });
       return false;
     }
   };
@@ -90,47 +86,54 @@ const Login = () => {
     if (password.length > 6) {
       return true;
     } else {
-      toast.show({
-        avoidKeyboard: true,
-        render: () => (
-          <ToastMessage
-            message={"Password minimum length of 6"}
-            type={"error"}
-          />
-        ),
-      });
+      showToast({ message: "Password minimum length of 6", type: "error" });
       return false;
     }
   };
   const handleRegisterUser = async () => {
-    console.log("tryr");
     if (password == confirmPassword) {
+      if (email && password && validateEmail(email)) {
+        const payload = {
+          email,
+          password,
+        };
+        try {
+          createUser(payload)
+            .then((success) => {
+              if (success.userId) {
+                showToast({
+                  message: "User registered successfully",
+                  type: "success",
+                });
+                setLoginForm(true);
+              } else {
+                showToast({ message: "An error occurred", type: "error" });
+              }
+            })
+            .catch((error) => {
+              showToast({ message: "An error occurred", type: "error" });
+            });
+        } catch (e) {
+          showToast({
+            message: "Oops Please check your form and try again",
+            type: "error",
+          });
+        }
+      }
     } else {
-      toast.show({
-        avoidKeyboard: true,
-        render: () => (
-          <ToastMessage
-            message={"Password and confrim password do not match"}
-            type={"error"}
-          />
-        ),
+      showToast({
+        message: "Password and confrim password do not match",
+        type: "error",
       });
     }
+  };
 
-    if (email && password && validateEmail(email)) {
-      try {
-        createUser(
-          {
-            email,
-            password,
-          },
-          navigation
-        );
-      } catch (e) {
-        console.log("error: ", e);
-        Alert.alert("Oops", "Please check your form and try again");
-      }
-    }
+  const showToast = ({ message, type }) => {
+    toast.closeAll();
+    toast.show({
+      avoidKeyboard: true,
+      render: () => <ToastMessage message={message} type={type} />,
+    });
   };
 
   return (
@@ -188,6 +191,7 @@ const Login = () => {
   );
 };
 
+//just  to show different styling techniques
 const styles = StyleSheet.create({
   container: {
     flex: 1,

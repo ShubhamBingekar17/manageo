@@ -16,6 +16,7 @@ import CloseIcon from "../assets/CloseIcon";
 import { addNewTask, updateTask } from "../actions/storeActions";
 import { TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import store from "../store/configStore";
 
 const AddTaskModal = ({ modalVisible, setModalVisible, taskData }) => {
   const [taskTitle, setTaskTitle] = useState("");
@@ -34,20 +35,18 @@ const AddTaskModal = ({ modalVisible, setModalVisible, taskData }) => {
   };
 
   const handleAddTask = async () => {
-    const userId = await AsyncStorage.getItem("userId");
 
-    addNewTask({
-      userId,
+    store.dispatch(addNewTask({
       taskTitle,
       taskDiscription,
       createdAt,
       status,
-    });
+    }))
     handleRestState();
   };
 
   const handleUpdateTask = () => {
-    updateTask({
+    store.dispatch(updateTask({
       index: taskData.index,
       value: {
         taskTitle,
@@ -55,7 +54,8 @@ const AddTaskModal = ({ modalVisible, setModalVisible, taskData }) => {
         createdAt,
         status,
       },
-    });
+      payload: store.getState().task
+    }));
     handleRestState();
   };
 
