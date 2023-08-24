@@ -19,12 +19,14 @@ npm start
 ## About Project ##
 
 1. USer can register themself with email and password
-2. User logins using his credential (api issues lead to bypass this)
-3. Fetching all the tasks from the API and storing in Redux.
-4. Adding of tasks with API.
+2. User logins using his credential with API
+3. Fetching all the tasks and storing in Redux.
+4. Adding of tasks.
 5. Update - Delete operations can be perform on the tasks (local only) (redux state is changed not the API's).
 6. User logout.
 7. USer can filter tasks based on the provided filter opetions
+
+Note: Add the Task CRUD operations are done with Redux only No apis are involved
 
 ## Compatibility ##
 
